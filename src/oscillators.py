@@ -26,7 +26,7 @@ def rk4(partial_eq, t, y, dt):
     k2 = partial_eq(t + dt / 2, [y[i] + k1[i]*(dt/2) for i in range(len(y))])
     k3 = partial_eq(t + dt / 2, [y[i] + k2[i]*(dt/2) for i in range(len(y))])
     k4 = partial_eq(t + dt, [y[i] + k3[i]*dt for i in range(len(y))])
-    
+     
     out = [y[i] + (dt/6) * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]) for i in range(len(y))]
     return out
 
@@ -72,19 +72,3 @@ if __name__ == "__main__":
     plt.figure()
     plt.plot(sols[0],sols[1])
     plt.show()
-    '''plt.figure()
-    plt.plot(sols.y[0],  (lambda x : 0.5*alpha*x*x + 0.25*beta*pow(x,4)) (sols.y[0]))
-    plt.figure()
-    plt.plot(sols.y[0],  (lambda x : 0.5*x*x) (sols.y[1]))
-    plt.show()
-'''
-'''
-    print(type(sols.y[1]))
-    plt.figure()
-    plt.plot(sols.y[0],sols.y[1])
-    plt.figure()
-    plt.plot(sols.y[0],  (lambda x : 0.5*alpha*x*x + 0.25*beta*pow(x,4)) (sols.y[0]))
-    plt.figure()
-    plt.plot(sols.y[0],  (lambda x : 0.5*x*x) (sols.y[1]))
-    plt.show()
-'''
