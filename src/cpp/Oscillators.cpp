@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Numerical.h"
 
 int main() 
 {

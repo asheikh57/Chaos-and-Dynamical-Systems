@@ -6,11 +6,11 @@
 #include <string>
 #include "StateVector.h"
 namespace numerical {
-    using StateVector = std::vector<double>;
+    //using StateVector = std::vector<double>;
     using Time = double;
     using Parameters = std::map<std::string, double>;
     using DifferentialEquationFunction = std::function<StateVector(Time, StateVector, Parameters)>;
-    std::vector<double> rk4(DifferentialEquationFunction &diff_eq, // takes t, y as input and outputs a y based off of it
+    StateVector rk4(DifferentialEquationFunction &diff_eq, // takes t, y as input and outputs a y based off of it
            Time &t, 
            StateVector &y);
 
