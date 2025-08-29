@@ -12,13 +12,9 @@ class StateVector // wrapper class for std::vector with + operation
       StateVector(std::vector<double> value) : m_state(value) {};
 
       // Rule of Five
-      StateVector(StateVector &other) {
-        m_state = other.m_state;
-      }
-
-      StateVector(StateVector&& other) {
-        m_state = std::move(other.m_state);
-      }
+      StateVector(StateVector &other) : m_state(other.m_state){};
+      
+      StateVector(StateVector&& other) : m_state(std::move(other.m_state)) {};
 
       StateVector& operator=(const StateVector &other) {
         m_state = other.m_state;
