@@ -5,11 +5,17 @@
 #include <map>
 #include <string>
 #include "StateVector.h"
+#include "StrongType.h"
+#include "TypeTags.h"
+
 namespace numerical {
-    //using StateVector = std::vector<double>;
-    using Time = double;
+    using StateElement = StrongType<double, StateElement>;
+    using StateVector = StateVector<StateElement>;
+    using Time = StrongType<double, TimeTag>;
     using Parameters = std::map<std::string, double>;
     using DifferentialEquationFunction = std::function<StateVector(Time, StateVector, Parameters)>;
+
+    
     StateVector rk4(DifferentialEquationFunction &diff_eq, // takes t, y as input and outputs a y based off of it
            Time &t, 
            StateVector &y);

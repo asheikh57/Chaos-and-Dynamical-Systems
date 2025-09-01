@@ -1,3 +1,6 @@
+#ifndef STRONG_TYPE_H
+#define STRONG_TYPE_H
+
 #include "StateVector.h"
 template<typename T, typename TypeName>
 struct StrongType 
@@ -36,3 +39,5 @@ struct StrongType
     explicit StrongType(const T &val) : value(val) {};
     explicit StrongType(const T &&val) : value(std::move(val)) {};
 };
+
+#endif

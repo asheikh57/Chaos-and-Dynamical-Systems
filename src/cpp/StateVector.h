@@ -6,27 +6,12 @@
 #include <algorithm>
 #include <functional>
 
-class StateVector // wrapper class for std::vector with + operation
+// wrapper class for std::vector with + operation
+template<typename T>
+class StateVector
 {
     public:
-      StateVector(std::vector<double> value) : m_state(value) {};
-
-      // Rule of Five
-      StateVector(StateVector &other) : m_state(other.m_state){};
-      
-      StateVector(StateVector&& other) : m_state(std::move(other.m_state)) {};
-
-      StateVector& operator=(const StateVector &other) {
-        m_state = other.m_state;
-        return *this;
-      }
-
-      StateVector& operator=(const StateVector &&other) {
-        m_state = std::move(other.m_state);
-        return *this;
-      }
-
-      ~StateVector() {};
+      StateVector(std::vector<double> &value) : m_state(value) {};
 
       // Adding state vectors
       StateVector operator+(StateVector &other) const {
@@ -34,28 +19,28 @@ class StateVector // wrapper class for std::vector with + operation
             perror("StateVector: INVALID ADDITION, DIMENSION OF OPERANDS DO NOT MATCH");
             exit(1);
         }
-        std::vector<double> result(other.m_state.size());
+        std::vector<T> result(other.m_state.size());
         std::transform(m_state.begin(), 
                        m_state.end(),
                        other.m_state.begin(), 
                        result.begin(),
-                       std::plus<double>());
+                       std::plus<T>());
         return StateVector(result);    
       };
 
       // Scalar multiplication
-      StateVector operator*(double &scalar) {
-        std::vector<double> result(m_state.size());
+      StateVector operator*(T &scalar) {
+        std::vector<T> result(m_state.size());
         std::transform(m_state.begin(), 
                        m_state.end(), 
                        result.begin(), 
-                       [scalar](double y) {return scalar * y;});
+                       [scalar](T y) {return scalar * y;});
         return StateVector(result);
       }
 
-      std::vector<double> getState() const { return m_state;} // breaks encapsulation :/
+      std::vector<T> getState() const { return m_state;} // breaks encapsulation :/
     private:
-      std::vector<double> m_state;
+      std::vector<T> m_state;
 };
 
 #endif
